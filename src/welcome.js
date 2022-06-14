@@ -9,13 +9,13 @@ setTimeout(function () {
 
 			if (PKAE.isMobile) {
 				change -= 15;
-				body_str = 'Tips:<br/>Please make sure your device is not in silent mode. You might need to physically flip the silent switch. '+
-				'<img src="phone-switch.jpg" style="max-width:224px;max-height:126px;width:40%;margin: 10px auto; display: block;"/>'+
+				body_str = '提示：<br/>请确认您的手机没有被静音。您或许需要切换物理静音开关。'+
+				'<img src="phone-switch.jpg" alt="" style="max-width:224px;max-height:126px;width:40%;margin: 10px auto; display: block;"/>'+
 				'<br/><br/>';
 			}
 			else {
-				body_str = 'Tips:<br/>Please keep in mind that most key shortcuts rely on the <strong>Shift + <u>key</u></strong> combo. (eg Shift+Z for undo, Shift+C copy, Shift+X cut... etc )<br/><br/>';
-				body_str2 = 'Check out the codebase on <a href="https://github.com/pkalogiros/audiomass" target="_blank">Github</a><br/><br/>'; // checkout the code on github
+				body_str = '提示：<br/>本程序绝大多数的快捷键都使用 <strong>Shift + <u>?</u></strong> 键组合。 （例如 Shift+Z 撤销, Shift+C 复制, Shift+X 剪切，等等）<br/><br/>';
+				body_str2 = '访问 <a href="https://github.com/pkalogiros/audiomass" target="_blank">Github</a> 检出英语原版的源代码，或到 <a href="https://github.com/14725/AudioMass">https://github.com/14725/AudioMass</a> 帮我翻译。<br/><br/>'; // checkout the code on github
 			}
 
 			// Welcome to AudioMass,
@@ -26,11 +26,11 @@ setTimeout(function () {
 					PKAE.ui.KeyHandler.removeCallback ('modalTemp');
 			},
 			body:'<div style="overflow:auto;-webkit-overflow-scrolling:touch;max-width:580px;width:calc(100vw - 40px);max-height:calc(100vh - 340px);min-height:110px;font-size:13px; color:#95c6c6;padding-top:7px;">'+
-				'AudioMass is a free, open source, web-based Audio and Waveform Editor.<br />It runs entirely in the browser with no backend and no plugins required!'+
+				'AudioMass 是免费、自由、开源的网页版音频编辑器。<br />它只在浏览器中运行，不上传数据到服务器，也不用本机安装浏览器插件！'+
 				'<br/><br/><br/>'+
 				body_str+
-				'You can load any type of audio your browser supports and perform operations such as fade in, cut, trim, change the volume, '+
-				'and apply a plethora of audio effects.<br/><br/>'+
+				'你可以加载你的浏览器支持的任意格式文件，制作淡入淡出、剪切裁剪以及修改音量等编辑操作，还有用不完的音频特效！'+
+				'<br/><br/>'+
 				body_str2+
 				'</div>',
 			setup:function( q ) {
