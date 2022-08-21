@@ -31,8 +31,8 @@
 			/** Error handler (throws error at the console) **/
 			reader.onerror = function( e ) {
 				var message,
-					lut = [ "File not found.", "File coulnot be opened",  
-						"File couldnot be uploaded", "Couldnot read File", "File too large" ];
+					lut = [ "找不到文件", "不能打开文件",  
+						"不能上传文件", "不能读取文件", "文件过大，无法处理" ];
 				// http://www.w3.org/TR/FileAPI/#ErrorDescriptions
 				throw( lut[ ( e.target.error.code - 1 ) ] );
 			},
@@ -64,8 +64,11 @@
 		var win = window;
 		// check to see if we are using a mobile device - no need for dragNdrop in devices
 		// that do not support it somehow yet
-		if( ( 'ontouchstart' in window ) )
-			return "mobile";
+		
+		// 14725: 为什么？这会错过带触摸屏的电脑。
+		
+		//if( ( 'ontouchstart' in window ) )
+			//return "mobile";
 		
 			/** JS Object, used to define the file-reading method **/
 		var method_lut = {
