@@ -59,7 +59,7 @@
 			{
 					//  ----------------
 					new PKSimpleModal ({
-						title : 'Open or append',
+						title : '打开或追加',
 						clss  : 'pk_modal_anim pk_fnt10',
 						ondestroy : function ( q ) {
 							app.ui.InteractionHandler.on = false;
@@ -67,7 +67,7 @@
 						},
 						buttons:[
 							{
-								title:'OPEN NEW',
+								title:'作为新文件打开',
 								callback: function( q ) {
 									wavesurfer.backend._add = 0;
 									func ();
@@ -75,7 +75,7 @@
 								}
 							},
 							{
-								title:'ADD IN EXISTING',
+								title:'追加到现有文件',
 								callback: function( q ) {
 									wavesurfer.backend._add = 1;
 									func ();
@@ -83,7 +83,7 @@
 								}
 							}
 						],
-						body    : '<p>Append file to existing track?</p>',
+						body    : '<p>追加到现有音频？</p>',
 						setup   : function( q ) {
 							app.ui.InteractionHandler.checkAndSet ('modal');
 							app.ui.KeyHandler.addCallback ('modalTempErr', function ( e ) {
@@ -145,12 +145,7 @@
 		this.LoadFile = function ( e ) {
 			if (e.files.length > 0)
 			{
-				if (e.files[0].type == "audio/mp3"
-					|| e.files[0].type == "audio/wave"
-					|| e.files[0].type == "audio/mpeg"
-					|| e.files[0].type == "audio/aiff"
-					|| e.files[0].type == "audio/flac"
-					|| e.files[0].type == "audio/ogg")
+				if (true)	/* 14725: 取消文件内容限制，或者？ */
 				{
 
 							var func = function () {
@@ -176,7 +171,7 @@
 							{
 									//  ----------------
 									new PKSimpleModal ({
-										title : 'Open or append',
+										title : '打开或追加',
 										clss  : 'pk_modal_anim pk_fnt10',
 										ondestroy : function ( q ) {
 											app.ui.InteractionHandler.on = false;
@@ -184,7 +179,7 @@
 										},
 										buttons:[
 											{
-												title:'OPEN NEW',
+												title:'作为新文件打开',
 												callback: function( q ) {
 													wavesurfer.backend._add = 0;
 													func ();
@@ -192,7 +187,7 @@
 												}
 											},
 											{
-												title:'ADD IN EXISTING',
+												title:'追加到现有文件',
 												callback: function( q ) {
 													wavesurfer.backend._add = 1;
 													func ();
@@ -200,7 +195,7 @@
 												}
 											}
 										],
-										body    : '<p>Append file to existing track?</p>',
+										body    : '<p>追加到现有音频？</p>',
 										setup   : function( q ) {
 											app.ui.InteractionHandler.checkAndSet ('modal');
 											app.ui.KeyHandler.addCallback ('modalTempErr', function ( e ) {
@@ -682,7 +677,7 @@
 			var input = null;
 			app.listenFor ('RequestLoadLocalFile', function () {
 					wavesurfer.pause();
-					
+					// 14725: TODO: 添加 ShowOpenFilePicker() 支持
 					if (input)
 					{
 						input.parentNode.removeChild( input );
@@ -691,7 +686,7 @@
 
 					input = d.createElement( 'input' );
 					input.setAttribute ('type', 'file');
-					input.setAttribute ('accept', 'audio/*');
+					input.setAttribute ('accept', 'audio/*,video/*');
 					input.className = 'pk_inpfile';
 					input.onchange = function () {
 						q.LoadFile ( input );
@@ -1213,7 +1208,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Hard Limit (fx)',
+					desc : '使用硬限幅器 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1234,7 +1229,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.HardLimit ( val ) );
 			
-			OneUp ('Applied Hard Limit (fx)');
+			OneUp ('已使用硬限幅器 (效果)');
 		});
 		
 		app.listenFor ('RequestActionFX_PARAMEQ', function ( val ) {
@@ -1247,7 +1242,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Parametric EQ (fx)',
+					desc : '应用参量均衡器 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1268,7 +1263,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.ParametricEQ ( val ) );
 			
-			OneUp ('Applied Parametric EQ (fx)');
+			OneUp ('已应用参量均衡器 (效果)');
 		});
 		app.listenFor ('RequestActionFX_PREVIEW_PARAMEQ', function ( val ) {
 			if (!q.is_ready || !val) return ;
@@ -1333,7 +1328,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Distortion (fx)',
+					desc : '应用失真 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1354,7 +1349,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.Distortion ( val ) );
 			
-			OneUp ('Applied Distortion (fx)');
+			OneUp ('已应用失真 (效果)');
 		});
 
 		app.listenFor ('RequestActionFX_PREVIEW_DELAY', function ( val ) {
@@ -1393,7 +1388,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Delay (fx)',
+					desc : '应用延迟 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1414,7 +1409,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.Delay ( val ) );
 			
-			OneUp ('Applied Delay (fx)');
+			OneUp ('已应用延迟 (效果)');
 		});
 
 		app.listenFor ('RequestActionFX_PREVIEW_REVERB', function ( val ) {
@@ -1453,7 +1448,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Reverb (fx)',
+					desc : '应用混响 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1474,7 +1469,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.Reverb ( val ) );
 			
-			OneUp ('Applied Reverb (fx)');
+			OneUp ('已应用混响 (效果)');
 		});
 
 		app.listenFor ('RequestActionFX_PREVIEW_COMPRESSOR', function ( val ) {
@@ -1514,7 +1509,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Compressor (fx)',
+					desc : '应用压缩器 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1535,7 +1530,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.Compressor ( val ) );
 			
-			OneUp ('Applied Compressor (fx)');
+			OneUp ('已应用压缩器 (效果)');
 		});
 		app.listenFor ('RequestActionFX_Normalize', function ( val ) {
 			if (!q.is_ready) return ;
@@ -1547,7 +1542,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Normalize ',
+					desc : '应用音量规整 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1568,7 +1563,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.Normalize ( val ) );
 			
-			OneUp ('Applied Normalize');
+			OneUp ('已应用音量规整 (效果)');
 		});
 
 		app.listenFor ('RequestActionFX_Invert', function ( val ) {
@@ -1581,7 +1576,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Invert ',
+					desc : '翻转波形',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1602,7 +1597,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.Invert() );
 			
-			OneUp ('Applied Invert');
+			OneUp ('已应用翻转波形');
 		});
 
 		app.listenFor ('RequestActionFX_RemSil', function ( val ) {
@@ -1615,7 +1610,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Remove Silence ',
+					desc : '删除无声片段 ',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1771,7 +1766,7 @@
 				wavesurfer.drawBuffer();
 			},40);
 
-			OneUp ('Applied :: Remove Silence');
+			OneUp ('已应用 :: 删除无声片段');
 		});
 
 
@@ -1808,15 +1803,15 @@
 					cb   : cb
 				});
 			}
-
+			//14725: 此处翻译存疑
 			if (val === 'flip')
 			{
-				handleStateInline ( start, end, 'Flip Channels' );
+				handleStateInline ( start, end, '翻转声道' );
 				AudioUtils.FX ( start, end, AudioUtils.FXBank.Flip ( val ) );
 			}
 			else if (val === 'stereo')
 			{
-				handleStateInline ( start, end, 'Make Stereo', function(){_compute_channels ()});
+				handleStateInline ( start, end, '制作立体声', function(){_compute_channels ()});
 
 				var originalBuffer = wavesurfer.backend.buffer;
 				var emptySegment   = wavesurfer.backend.ac.createBuffer (
@@ -1848,7 +1843,7 @@
 			}
 			else if (val === 'mono')
 			{
-				handleStateInline ( start, end, 'Make Mono', function(){_compute_channels()} );
+				handleStateInline ( start, end, '制作单声', function(){_compute_channels()} );
 
 				var originalBuffer = wavesurfer.backend.buffer;
 				var emptySegment   = wavesurfer.backend.ac.createBuffer (
@@ -1875,7 +1870,7 @@
 				app.fireEvent ('RequestSeekTo', 0.00);
 			}
 
-			OneUp ('Applied Channel Change: ' + val);
+			OneUp ('已应用声道修改: ' + val);
 		});
 
 		app.listenFor ('RequestActionFX_Reverse', function ( val ) {
@@ -1888,7 +1883,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Reverse ',
+					desc : '倒转音频 ',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1909,7 +1904,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.Reverse() );
 			
-			OneUp ('Applied Reverse');
+			OneUp ('已倒转音频');
 		});
 		app.listenFor ('RequestActionFX_FadeIn', function ( val ) {
 			if (!q.is_ready) return ;
@@ -1921,7 +1916,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Fade In (fx)',
+					desc : '应用淡入 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1942,7 +1937,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.FadeIn() );
 			
-			OneUp ('Applied Fade In (fx)');
+			OneUp ('已应用淡入 (效果)');
 		});
 		app.listenFor ('RequestActionFX_FadeOut', function ( val ) {
 			if (!q.is_ready) return ;
@@ -1954,7 +1949,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Fade Out (fx)',
+					desc : '应用淡出 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -1975,7 +1970,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.FadeOut() );
 			
-			OneUp ('Applied Fade Out (fx)');
+			OneUp ('已应用淡出 (效果)');
 		});
 		
 		
@@ -2040,7 +2035,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Gain (fx)',
+					desc : '应用音量调节 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -2061,7 +2056,7 @@
 			handleStateInline ( start, end );
 			AudioUtils.FX( start, end, AudioUtils.FXBank.Gain( val ) );
 
-			OneUp ('Applied Gain (fx)');
+			OneUp ('已应用音量调节 (效果)');
 		});
 
 		app.listenFor ('RequestActionFX_PREVIEW_SPEED', function ( val ) {
@@ -2102,7 +2097,7 @@
 
 			function handleStateInline ( start, end ) {
 				app.fireEvent ('StateRequestPush', {
-					desc : 'Apply Speed (fx)',
+					desc : '应用调节速度 (效果)',
 					meta : [ start, end ],
 					data : wavesurfer.backend.buffer
 				});
@@ -2170,7 +2165,7 @@
 
 				app.fireEvent ('RequestSeekTo', (start/wavesurfer.getDuration()));
 
-				OneUp ('Applied Speed (fx)');
+				OneUp ('已应用调节速度 (效果)');
 
 //				AudioUtils.Insert (new_offset, rendered_buffer);
 
@@ -2266,8 +2261,8 @@
 				}
 			}
 			
-			if (undo) OneUp ('Undo ' + state.desc);
-			else OneUp ('Redo ' + state.desc);
+			if (undo) OneUp ('撤销 ' + state.desc);
+			else OneUp ('恢复 ' + state.desc);
 		});
 
 
