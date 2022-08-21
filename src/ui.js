@@ -524,7 +524,7 @@
 
 										buttons:[
 											{
-												title:'OPEN IN NEW WINDOW',
+												title:'在新窗口打开',
 												callback: function( q ) {
 													window.open ( window.location.pathname + '?local=' + name);
 
@@ -533,7 +533,7 @@
 											}
 										],
 
-										body:'<p>Open in new window?</p>' + txt,
+										body:'<p>在新窗口打开?</p>' + txt,
 										setup:function( q ) {
 											app.fireEvent ('RequestPause');
 											app.fireEvent( 'RequestRegionClear');
@@ -566,7 +566,7 @@
 
 									var msg = '';
 									if (ret.length === 0) {
-										msg += 'No drafts found...';
+										msg += '找不到草稿...';
 									}
 									else
 									{
@@ -789,8 +789,8 @@
 										if (app.engine.is_ready && !append)
 										{
 											var mm = new PKSimpleModal ({
-												title : 'Open in Existing?',
-												body  : '<div>Open in new window, or in the current one?</div>',
+												title : '在当前窗口打开?',
+												body  : '<div>在新窗口打开，还是在当前窗口打开?</div>',
 												buttons:[
 													{
 														title:'OPEN',
@@ -802,7 +802,7 @@
 														}
 													},
 													{
-														title:'OPEN IN NEW',
+														title:'在新窗口打开',
 														clss:'pk_modal_a_accpt',
 														callback: function( q ) {
 															window.open (window.location.pathname + '?local=' + name);
@@ -1109,7 +1109,7 @@
 					},
 
 					{
-						name:'Frequency Analyser',
+						name:'频谱分析',
 						action: function ( obj ) {
 							app.fireEvent ('RequestShowFreqAn', 'eq', [1]);
 						},
@@ -1117,7 +1117,7 @@
 							app.listenFor ('DidToggleFreqAn', function ( url, val ) {
 								if (url !== 'eq') return ;
 
-								var txt = 'Frequency Analyser';
+								var txt = '频谱分析';
 								if (val) {
 									obj.innerHTML = txt + ' &#10004;';
 								} else {
@@ -1128,7 +1128,7 @@
 					},
 
 					{
-						name:'Spectrum Analyser',
+						name:'声谱分析',
 						action: function ( obj ) {
 							app.fireEvent ('RequestShowFreqAn', 'sp', [1]);
 						},
@@ -1136,7 +1136,7 @@
 							app.listenFor ('DidToggleFreqAn', function ( url, val ) {
 								if (url !== 'sp') return ;
 
-								var txt = 'Spectrum Analyser';
+								var txt = '声谱分析';
 								if (val) {
 									obj.innerHTML = txt + ' &#10004;';
 								} else {
@@ -1147,14 +1147,14 @@
 					},
 
 					{
-						name:'Tempo Tools',
+						name:'节拍工具',
 						action: function ( obj ) {
 							app.fireEvent ('RequestActionTempo');
 						}
 					},
 
 					{
-						name:'ID3 Tags',
+						name:'ID3 标签',
 						action: function ( obj ) {
 							app.fireEvent ('RequestActionID3');
 						}
@@ -1165,14 +1165,14 @@
 					},
 
 					{
-						name:'Center to Cursor <span class="pk_shrtct">[Tab]</span>',
+						name:'居中到光标 <span class="pk_shrtct">[Tab]</span>',
 						action: function ( obj ) {
 							app.fireEvent ('RequestViewCenterToCursor');
 						}
 					},
 
 					{
-						name:'Reset Zoom <span class="pk_shrtct">[0]</span>',
+						name:'重设缩放 <span class="pk_shrtct">[0]</span>',
 						action: function ( obj ) {
 							app.fireEvent ('RequestZoomUI', 0);
 						}
@@ -1181,19 +1181,19 @@
 				]
 			},
 			{
-				name:'Help',
+				name:'帮助',
 				children:[
 					{
-						name   : 'Store Offline Version',
+						name   : '存储离线版本',
 						action : function () {
 							if (window.location.href.indexOf('-cache') > 0) {
 
 								function onUpdateReady ( e ) {
-									if (confirm ('Would you like to refresh the page to load the newer version?'))
+									if (confirm ('刷新网页使用“离线”版本?'))
 										window.location.reload();
 								}
 								function downLoading ( e ) {
-									OneUp ('Downloading newer version', 1500);
+									OneUp ('下载新版本', 1500);
 								}
 
 								window.applicationCache.onupdateready = onUpdateReady;
@@ -1208,10 +1208,10 @@
 								return ;
 							}
 
-							var message = 'This will open a new window that will try to store a local version in your browser'; // nicer text
+							var message = '这会打开本程序的“离线”版本，浏览器应当缓存它以供离线访问'; // nicer text
 
 							new PKSimpleModal ({
-								title : 'Open Offline Version?',
+								title : '打开离线版本?',
 
 								ondestroy : function( q ) {
 									app.ui.InteractionHandler.on = false;
@@ -1220,9 +1220,9 @@
 
 								buttons:[
 									{
-										title:'OPEN',
+										title:'打开',
 										callback: function( q ) {
-											window.open ('/index-cache.html');
+											window.open ('index-cache.html');
 											q.Destroy ();
 										}
 									}
@@ -1243,7 +1243,7 @@
 						setup: function ( obj ) {
 							if (window.location.href.indexOf('-cache') > 0)
 							{
-								obj.innerHTML = 'Update Offline Version';
+								obj.innerHTML = '更新离线版本';
 							}
 						}
 					},
@@ -1253,14 +1253,14 @@
 					},
 
 					{
-						name   : 'About',
+						name   : '关于',
 						action : function () {
-							window.open ('/about.html');
+							window.open ('about.html');
 						}
 					},
 
 					{
-						name   : 'See Welcome Message',
+						name   : '查看欢迎信息',
 						action : function () {
 							PKAudioEditor._deps.Wlc ();
 						}
@@ -1268,7 +1268,7 @@
 					// {
 					// 	name   : 'About AudioMass',
 					// 	action : function () {
-					// 		window.open ('/about.html');
+					// 		window.open ('about.html');
 					// 	}
 					// },
 
@@ -1277,9 +1277,15 @@
 					// },
 
 					{
-						name   : 'SourceCode on Github',
+						name   : '原版源码 (托管于 GitHub)',
 						action : function () {
 							window.open ('https://github.com/pkalogiros/audiomass');
+						}
+					},
+					{
+						name   : '翻译源码 (托管于 GitHub)',
+						action : function () {
+							window.open ('https://github.com/14725/audiomass');
 						}
 					}
 				]

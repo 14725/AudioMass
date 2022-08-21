@@ -642,7 +642,7 @@
 			el_list.className = 'pk_row pk_noselect pk_pglst';
 
 			el_list.innerHTML = '<div class="pk_pgeq_els">' +
-				'<span class="pk_txlft"> #</span><span>type</span><span>gain</span><span>freq</span><span>Q</span>' +
+				'<span class="pk_txlft"> #</span><span>类型</span><span>强度</span><span>频率</span><span>Q</span>' +
 			'</div>';
 
 			q.el.appendChild ( el_list );
@@ -910,7 +910,7 @@
 			var sel1 = range.type === 'lowpass' ? 'selected' : '';
 			var sel2 = range.type === 'highpass' ? 'selected' : '';
 			var el_type = d.createElement ('div');
-			el_type.innerHTML = '<select><option>peaking</option><option ' + sel1 + '>lowpass</option><option ' + sel2 + '>highpass</option></select>';
+			el_type.innerHTML = '<select><option value="peaking">带通/带阻</option><option value="lowpass" ' + sel1 + '>低通</option><option value="highpass" ' + sel2 + '>高通</option></select>';
 
 			el_type.getElementsByTagName('select')[0].onchange = function ( e ) {
 				var val = this.options[this.selectedIndex].value;
@@ -1073,7 +1073,7 @@
 			// delete
 			var el_del = d.createElement ('div');
 			el_del.className = 'pk_del';
-			el_del.innerHTML = '<a style="cursor:pointer">DELETE</a>';
+			el_del.innerHTML = '<a style="cursor:pointer">删除</a>';
 			el_del.getElementsByTagName('a')[0].onclick = function ( e ) {
 				q.Remove (range);
 			};
@@ -1131,7 +1131,7 @@
 
 		var x = new PKAudioFXModal ({
 			id: filter_id,
-			title: 'Paragraphic EQ',
+			title: '片段均衡器',
 
 			ondestroy: function ( q ) {
 				app.stopListeningFor ('DidAudioProcess', DrawBars);
@@ -1148,7 +1148,7 @@
 			body: '',
 			
 			presets:[
-					{name:'Old Telephone',val:'1,highpass,0,5800,5.8,1,lowpass,0,7060,5'}
+					{name:'旧式电话',val:'1,highpass,0,5800,5.8,1,lowpass,0,7060,5'}
 			],
 
 			custom_pres:custom_presets.Get (filter_id),
@@ -1198,7 +1198,7 @@
 			},
 
 			buttons: [{
-				title:'Apply EQ',
+				title:'应用均衡器',
 				clss:'pk_modal_a_accpt',
 				callback: function( q ) {
 

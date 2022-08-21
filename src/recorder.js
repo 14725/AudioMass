@@ -67,7 +67,7 @@
 			if (!navigator.mediaDevices)
 			{
 				app.fireEvent ('ErrorRec');
-				app.fireEvent ('ShowError', 'No recording device found');
+				app.fireEvent ('ShowError', '无录音设备');
 				return (false);
 			}
 
@@ -79,7 +79,7 @@
 			if (!audio_context)
 			{
 				app.fireEvent ('ErrorRec');
-				app.fireEvent ('ShowError', 'No recording device found');
+				app.fireEvent ('ShowError', '无录音设备');
 				return (false);
 			}
 

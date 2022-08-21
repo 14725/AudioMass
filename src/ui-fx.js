@@ -166,10 +166,10 @@
 
 			var x = new PKAudioFXModal({
 				id: filter_id,
-			    title:'Apply Gain to selected range',
+			    title:'调整选中区域音量',
 
 				presets:[
-					{name:'Silence',val:0},
+					{name:'静音',val:0},
 					{name:'-50%',val:0.5},
 					{name:'-25%',val:0.75},
 					{name:'+25%',val:1.25},
@@ -187,7 +187,7 @@
 			},
 			  buttons: [
 				{
-					title:'Apply Gain',
+					title:'调整音量',
 					clss:'pk_modal_a_accpt',
 					callback: function( q ) {
 						var value = getvalue ( q );
@@ -199,7 +199,7 @@
 					}
 				}
 			  ],
-			  body:'<div class="pk_row" style="border:none"><label>Gain percentage</label>' + 
+			  body:'<div class="pk_row" style="border:none"><label>音量百分数</label>' + 
 				'<input type="range" class="pk_horiz" min="0.0" max="2.5" step="0.01" value="1.0" />'+
 				'<span class="pk_val">100%</span></div>' +
 				'<div class="pk_row" style="border:none;padding:0">',
@@ -239,12 +239,12 @@
 
 			var x = new PKAudioFXModal({
 				id: filter_id,
-			  title:'Change Speed',
+			  title:'改变速度',
 				presets:[
 					{name:'-1/4',val:0.25},
 					{name:'-1/2',val:0.5},
-					{name:'Slightly slower',val:0.85},
-					{name:'Slightly faster%',val:1.1},
+					{name:'稍微变慢',val:0.85},
+					{name:'稍微变快',val:1.1},
 					{name:'+1/4',val:1.25},
 					{name:'+1/2',val:1.5}
 				],
@@ -261,7 +261,7 @@
 
 			  buttons: [
 				{
-					title:'Apply Rate',
+					title:'应用速度',
 					clss:'pk_modal_a_accpt',
 					callback: function( q ) {
 						var input = q.el_body.getElementsByTagName('input')[0];
@@ -274,7 +274,7 @@
 					}
 				}
 			  ],
-			  body:'<div class="pk_row" style="border:none"><label>Playback Rate</label>' + 
+			  body:'<div class="pk_row" style="border:none"><label>播放速度</label>' + 
 				'<input type="range" class="pk_horiz" min="0.2" max="2.0" step="0.05" value="1.0" />'+
 				'<span class="pk_val">1.0</span></div>',
 			  setup:function( q ) {
@@ -318,7 +318,7 @@
 			},
 			buttons: [
 				{
-					title:'Apply Changes',
+					title:'应用改变',
 					clss:'pk_modal_a_accpt',
 					callback: function( q ) {
 						if (mode === 1)
@@ -360,21 +360,21 @@
 
 					'<div class="pk_row">'+
 					'<input type="checkbox" class="pk_check pk_c_mm" id="xmm" name="makeMono">'+
-					'<label for="xmm">Make Mono</label></div>' + 
+					'<label for="xmm">制作单声</label></div>' + 
 			  		'<div class="pk_row" style="padding-left:30px">' +
 					'<input type="radio" class="pk_check pk_c_c" id="kf6" name="chnl" value="left">'+
-					'<label class="pk_dis" for="kf6">Left Channel</label>'+
+					'<label class="pk_dis" for="kf6">左声道</label>'+
 					'<input type="radio" class="pk_check pk_c_c" id="kf7" name="chnl" value="right">'+
-					'<label class="pk_dis" for="kf7">Right Channel</label>'+
+					'<label class="pk_dis" for="kf7">右声道</label>'+
 					'</div>'+ 
 
 					'<div class="pk_row"><input type="checkbox" class="pk_check pk_c_fl" id="xfc" name="flipChn">'+
-					'<label for="xfc">Flip Channels</label></div>' + 
+					'<label for="xfc">反转声道</label></div>' + 
 					'</div>' +
 
 					'<div class="pk_row pk_ms" style="border:none;display:none">'+
 						'<div class="pk_row"><input type="checkbox" class="pk_check pk_c_ms" id="xms" checked name="makeStereo">'+
-						'<label for="xms">Make Stereo</label></div>' + 
+						'<label for="xms">制作立体声</label></div>' + 
 					'</div>',
 			  setup:function( q ) {
 			  	  var main = null;
@@ -438,14 +438,14 @@
 
 		app.listenFor ('RequestFXUI_Silence', function () {
 			var x = new PKSimpleModal({
-			  title: 'Insert Silence',
+			  title: '插入静音',
 			  ondestroy: function( q ) {
 				UI.InteractionHandler.on = false;
 				UI.KeyHandler.removeCallback ('modalTemp');
 			  },
 			  buttons:[
 				{
-					title:'Insert Silence',
+					title:'插入静音',
 					clss:'pk_modal_a_accpt',
 					callback: function( q ) {
 						var input = q.el_body.getElementsByClassName('pk_horiz')[0];
@@ -464,10 +464,10 @@
 				}
 			  ],
 			  body:'<div class="pk_row"><input type="radio" class="pk_check" id="ifeq" name="rdslnc" value="beginning">'+ 
-				'<label  for="ifeq">Insert silence at beginning</label><br/>' +
+				'<label  for="ifeq">在开头插入静音</label><br/>' +
 				'<input type="radio" class="pk_check"  id="vgdja" name="rdslnc" checked value="cursor">'+
-				'<label for="vgdja">Insert silence at current cursor (<span class="pkcdpk"></span>)</label></div>'+
-				'<div class="pk_row"><label>Silence in seconds</label>'+
+				'<label for="vgdja">在当前光标处插入静音 (<span class="pkcdpk"></span>)</label></div>'+
+				'<div class="pk_row"><label>静音时间（秒）</label>'+
 				'<input type="range" min="0.0" max="30.0" class="pk_horiz" step="0.01" value="5.0" />'+
 				'<span class="pk_val">5s</span></div>',
 			  setup:function( q ) {
@@ -525,15 +525,15 @@
 
 			var x = new PKAudioFXModal({
 			  id    : filter_id,
-			  title : 'Apply Compression to selected range',
+			  title : '对选定区域实行压缩',
 			  clss  : 'pk_bigger',
 			ondestroy: function ( q ) {
 				app.ui.InteractionHandler.on = false;
 				app.ui.KeyHandler.removeCallback (modal_esc_key);
 			},
 				presets:[
-					{name:'Classic',val:'-40,5,7,0.002,0.1'},
-					{name:'Light',val:'-6,2,2.5,0.002,0.05'},
+					{name:'经典',val:'-40,5,7,0.002,0.1'},
+					{name:'轻型',val:'-6,2,2.5,0.002,0.05'},
 					{name:'Dashed Distortion',val:'-45,26,2.05,0.233,0.0'},
 					{name:'Chaotic Distortion',val:'-60,14,11.07,0.036,0.00'}
 				],
@@ -546,7 +546,7 @@
 
 			  buttons: [
 				{
-					title:'Apply',
+					title:'应用',
 					clss:'pk_modal_a_accpt',
 					callback: function( q ) {		
 						var inputs = q.el_body.getElementsByTagName('input');
@@ -1763,11 +1763,11 @@
 						extra = ',left=' + dat[0] + ',top=' + dat[1];
 					}
 
-					var wnd = window.open ('/' + url + '.html', title, "directories=no,titlebar=no,toolbar=no,"+
+					var wnd = window.open ('' + url + '.html', title, "directories=no,titlebar=no,toolbar=no,"+
 							"location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=188" + extra);
 
 					if (!wnd) {
-						OneUp ('Please allow pop-ups for AudioMass!', 3600, 'pk_r');
+						OneUp ('请禁用弹出窗口阻止程序!', 3600, 'pk_r');
 						return ;
 					}
 
